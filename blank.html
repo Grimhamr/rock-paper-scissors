@@ -3,50 +3,76 @@ let playerSelection = "";
 let computerSelection;
 let playerWins = 0;
 let computerWins=0;
-//player initializes game
+// We need a way to measure the highest ranking player. I haven't learned loops too well yet, so I will do this differently.
+// Set a variable to be the leading player; if it's less than 5, rerun the game.
+let leadingPlayerWins = 0;
 startGame();
-//player plays
-//computer plays
-//results are compared and announced
-if (computerSelection == playerSelection){
+
+function startGame(){
+if (playerWins>computerWins){
+    leadingPlayerWins=playerWins;
+}
+else if(computerWins>playerWins){
+    leadingPlayerWins=computerWins;
+}
+else{}
+
+
+
+if ((leadingPlayerWins<5)) {
+    console.log("lead wins:"+leadingPlayerWins);
+    startRound();
+    startGame();
+}
+else {
+    alert("It's over! You won "+playerWins+" times and the computer won "+computerWins+" times! Good game!" );
+}
+}
+
+
+
+
+function startRound(){
+    playerPlay();
+    computerPlay();
+    if (computerSelection == playerSelection){
 alert("It's a draw! " + computerSelection+ " vs " + playerSelection);
 }
 else {
 if (computerSelection == "rock"){
     if (playerSelection == "paper"){
         alert("You won this round! Paper beats rock!")
+        playerWins++;
         
     } 
     else if (playerSelection == "scissors"){
         alert("Oops, you lost this one. Rock beats scissors.");
+        computerWins++;
     }
     else{}
 }
 else if (computerSelection=="paper"){
     if (playerSelection=="rock"){
         alert("Oops, you lost this one. Paper beats rock.");
+        computerWins++;
     }
     else if(playerSelection=="scissors"){
         alert("Nice! Scissors cut paper!");
+        playerWins++;
     }
     else{}
 }
 else if(computerSelection=="scissors"){
     if (playerSelection=="rock"){
         alert("Nice one! Rock beats scissors!");
+        playerWins++;
     }
     else if(playerSelection=="paper"){
 
         alert("Oops, too bad! Scissors wins this one");
-
+        computerWins++;
     }
 }}
-
-
-function startGame(){
-    playerPlay();
-    computerPlay();
-
 }
 
 function playerPlay(){

@@ -1,0 +1,1 @@
+A standard rock-paper-scissors game!

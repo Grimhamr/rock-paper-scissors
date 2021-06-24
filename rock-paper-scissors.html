@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  </head>
+  <body>
+<button type="button" id="btnRock">Rock</button>
+<button type="button" id="btnPaper">Paper</button>
+<button type="button" id="btnScissors">Scissors</button>
+
+<div id="resultContainer"></div>
+
+<h1 id="currentGameResultContainer"></h1>
+  </body>
+
+
+</html>
+
+
+
+<script>
+
+btnRock.addEventListener("click", function(){
+    console.log("rock button pressed");
+    playerSelection="rock";
+   
+    startRound();
+    resultsAnnounce();
+    currentResultUpdate();
+    
+
+});
+btnPaper.addEventListener("click", function(){
+    console.log("paper button pressed");
+    playerSelection="paper";
+    
+    startRound();
+    resultsAnnounce();
+    currentResultUpdate();
+    
+  
+
+});
+btnScissors.addEventListener("click", function(){
+    console.log("scissors button pressed");
+    playerSelection="scissors";
+    
+    startRound();
+    resultsAnnounce();
+    currentResultUpdate();
+    
+});
+
+
+let playerSelection = "";
+let computerSelection;
+let playerWins = 0;
+let computerWins=0;
+let message="No message yet";
+let numberOfGames=0;
+
+const resultContainer = document.querySelector("#resultContainer");
+resultContainer.textContent = "Your wins: "+playerWins +"   Computer wins: "+computerWins +" Games played: "+numberOfGames;
+
+const currentGameResultContainer = document.querySelector("#currentGameResultContainer");
+currentGameResultContainer.textContent = " "+message;
+
+
+
+
+
+
+
+
+function currentResultUpdate(){
+    currentGameResultContainer.textContent = message;
+    resultContainer.textContent = "Your wins: "+playerWins +"   Computer wins: "+computerWins+" Games played: "+numberOfGames;
+;
+   
+}
+
+
+function resultsAnnounce(){
+
+if (numberOfGames>=5) {
+    if(playerWins>computerWins){
+    console.log("You win!");
+    message="You won!";
+    }
+    else if(computerWins>playerWins){
+        console.log("The computer wins!");
+        message="The computer won!";
+    }
+    else{
+       console.log("draw. play again");
+    }
+   
+}
+else {
+    console.log("game not yet concluded. we are at "+numberOfGames+" games");
+}
+}
+
+
+
+
+function startRound(){
+    playerPlay();
+    computerPlay();
+    numberOfGames++;
+    if (computerSelection == playerSelection){
+message= "It's a draw! " + computerSelection+ " vs " + playerSelection;
+}
+else {
+if (computerSelection == "rock"){
+    if (playerSelection == "paper"){
+        message="You won this round! Paper beats rock!";
+        playerWins++;
+        
+    } 
+    else if (playerSelection == "scissors"){
+        message="Oops, you lost this one. Rock beats scissors.";
+        computerWins++;
+    }
+    else{}
+}
+else if (computerSelection=="paper"){
+    if (playerSelection=="rock"){
+        message="Oops, you lost this one. Paper beats rock.";
+        computerWins++;
+    }
+    else if(playerSelection=="scissors"){
+        message="Nice! Scissors cut paper!";
+        playerWins++;
+    }
+    else{}
+}
+else if(computerSelection=="scissors"){
+    if (playerSelection=="rock"){
+        message="Nice one! Rock beats scissors!";
+        playerWins++;
+    }
+    else if(playerSelection=="paper"){
+
+        message="Oops, too bad! Scissors wins this one";
+        computerWins++;
+    }
+}}
+}
+
+function playerPlay(){
+//playerSelection = prompt("What's your move?");
+console.log("Player selected "+playerSelection);
+playerSelection = playerSelection.toLowerCase();
+console.log("system converted it to "+playerSelection);
+console.log("system checking for validity of " + playerSelection);
+if(playerSelection == "rock" || playerSelection == "paper" || playerSelection == "scissors") {
+    
+    
+        console.log("Player selected " + playerSelection);
+        
+}
+
+else {
+    
+  
+}
+return playerSelection;
+}
+
+
+function computerPlay(){
+//Choose a number 0--99 at random
+     computerSelection = "Nothing selected yet";
+    let number = Math.floor(Math.random()*100);
+    console.log(number + " has been selected at random");
+    
+//0-33 is rock, 34-66 is paper, 67-99 is scissors. 
+    if (number<=33){
+
+        computerSelection="rock";
+        
+    }
+    else if (number<=66){
+
+        computerSelection="paper";
+    
+    }
+    else   {
+
+        computerSelection="scissors";
+    }
+  
+    
+    console.log("Computer has selected "+ computerSelection);
+    return computerSelection;
+}
+
+
+
+
+</script>

@@ -3,9 +3,8 @@ let playerSelection = "";
 let computerSelection;
 let playerWins = 0;
 let computerWins=0;
-// We need a way to measure the highest ranking player. I haven't learned loops too well yet, so I will do this differently.
-// Set a variable to be the leading player; if it's less than 5, rerun the game.
 let leadingPlayerWins = 0;
+let numberOfGames=0;
 startGame();
 
 function startGame(){
@@ -19,13 +18,24 @@ else{}
 
 
 
-if ((leadingPlayerWins<5)) {
-    console.log("lead wins:"+leadingPlayerWins);
-    startRound();
-    startGame();
+if (numberOfGames>=5) {
+    if(playerWins>computerWins){
+    console.log("You win!");
+    alert("You won!");
+    }
+    else if(computerWins>playerWins){
+        console.log("The computer wins!");
+        alert("The computer won!");
+    }
+    else{
+        startRound();
+        startGame();
+    }
+   
 }
 else {
-    alert("It's over! You won "+playerWins+" times and the computer won "+computerWins+" times! Good game!" );
+    startRound();
+    startGame();
 }
 }
 
@@ -35,6 +45,7 @@ else {
 function startRound(){
     playerPlay();
     computerPlay();
+    numberOfGames++;
     if (computerSelection == playerSelection){
 alert("It's a draw! " + computerSelection+ " vs " + playerSelection);
 }
